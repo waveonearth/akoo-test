@@ -56,8 +56,6 @@ const categoryMap = {
     famous: "해외유명인"
 };
 
-
-
 async function loadPost() {
     if (!postId) return;
     const docRef = doc(db, "posts", postId);
@@ -79,6 +77,30 @@ async function loadPost() {
         alert("글을 찾을 수 없습니다.");
     }
 }
+
+function convertOembed() {
+    document.querySelectorAll("oembed[url]").forEach(el => {
+        const url = el.getAttribute("url");
+        const embedUrl = url.replace("youtu.be/", "www.youtube.com/embed/").split("?")[0];
+
+        const iframe = document.createElement("iframe");
+        iframe.src = embedUrl;
+        iframe.width = "100%";
+        iframe.height = "360";
+        iframe.frameBorder = "0";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+
+        el.replaceWith(iframe);
+    });
+}
+
+// 실행 위치: post 내용을 innerHTML로 넣은 다음
+document.getElementById("post-body").innerHTML = data.content;
+
+requestAnimationFrame(() => {
+    convertOembed();
+});
 
 document.getElementById("delete-post").addEventListener("click", async () => {
     const pw = prompt("비밀번호를 입력하세요:");
