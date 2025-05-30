@@ -56,12 +56,20 @@ const categoryMap = {
     famous: "해외유명인"
 };
 
+let postData = null;
+
 async function loadPost() {
     if (!postId) return;
     const docRef = doc(db, "posts", postId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
         const data = docSnap.data();
+
+        document.getElementById("post-body").innerHTML = data.content;
+
+        requestAnimationFrame(() => {
+            convertOembed();
+        });
         
         document.getElementById("post-title").textContent = data.title;
         document.getElementById("post-title-head").textContent = data.title;
@@ -94,13 +102,6 @@ function convertOembed() {
         el.replaceWith(iframe);
     });
 }
-
-// 실행 위치: post 내용을 innerHTML로 넣은 다음
-document.getElementById("post-body").innerHTML = data.content;
-
-requestAnimationFrame(() => {
-    convertOembed();
-});
 
 document.getElementById("delete-post").addEventListener("click", async () => {
     const pw = prompt("비밀번호를 입력하세요:");
