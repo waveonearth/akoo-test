@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKOO-헌터토크 글쓰기</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo"><a href="index.html">AKOO</a></div>
+        <nav class="category-nav">
+            <a href="#">HOT</a>
+            <a href="#">종합 게시판</a>
+            <a href="#">스퀘어</a>
+            <a href="#">일상토크</a>
+            <a href="./huntertalk.html" class="active">헌터토크</a>
+            <a href="#">케이팝</a>
+            <a href="#">BL</a>
+            <a href="#">한국드라마</a>
+            <a href="#">해외드라마</a>
+            <a href="#">후기</a>
+        </nav>
+        <div class="darkmode-toggle">
+            <input type="checkbox" id="darkmode-switch">
+        </div>
+        <div class="mobile-menu-icon" id="menuToggle">
+            ☰
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#">HOT</a>
+            <a href="#">종합 게시판</a>
+            <a href="#">스퀘어</a>
+            <a href="#">일상토크</a>
+            <a href="./huntertalk.html">헌터토크</a>
+            <a href="#">케이팝</a>
+            <a href="#">BL</a>
+            <a href="#">한국드라마</a>
+            <a href="#">해외드라마</a>
+            <a href="#">후기</a>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="#">HOT</a></li>
+                <li><a href="#">스퀘어</a></li>
+                <li><a href="#">일상토크</a></li>
+                <li><a href="./huntertalk.html">헌터토크</a></li>
+                <li><a href="#">케이팝</a></li>
+                <li><a href="#">BL</a></li>
+                <li><a href="#">한국드라마</a></li>
+                <li><a href="#">해외드라마</a></li>
+                <li><a href="#">국내 유명인</a></li>
+                <li><a href="#">해외 유명인</a></li>
+                <li class="accordion">
+                    <div class="toggle-header">아이돌 <span class="arrow"><img src="./asset/arrow.png" alt=""></span></div>
+                    <ul class="submenu">
+                    <li><a href="#">여자아이들</a></li>
+                    <li><a href="#">오마이걸</a></li>
+                    <li><a href="#">EXO</a></li>
+                    <li><a href="#">방탄소년단</a></li>
+                    <li><a href="#">러블리즈</a></li>
+                    <li><a href="#">I.O.I</a></li>
+                    <li><a href="#">인피니트</a></li>
+                    <li><a href="#">에이핑크</a></li>
+                    <li><a href="#">트와이스</a></li>
+                    <li><a href="#">2PM</a></li>
+                    <li><a href="#">샤이니</a></li>
+                    <li><a href="#">JYJ</a></li>
+                    <li><a href="#">소녀시대</a></li>
+                    <li><a href="#">동방신기</a></li>
+                    <li><a href="#">에이프릴</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="write-container">
+            <h2><span id="category-label" class="category-label"></span>-글쓰기</h2>
+
+            <!-- 말머리 -->
+            <div class="write-sub" id="subhead-buttons">
+                <button data-value="잡담" class="active">잡담</button>
+                <button data-value="이슈">이슈</button>
+                <button data-value="정보">정보</button>
+                <button data-value="뉴스">뉴스</button>
+            </div>
+
+            <input type="text" id="title" placeholder="제목을 입력하세요" class="title-input"/>
+            <textarea id="editor"></textarea>
+
+            <input type="text" id="tags" placeholder="태그를 쉼표로 구분해 입력하세요" class="tag-input"/>
+            <div class="schedule">
+                <label>예약 발행: <input type="datetime-local" id="scheduleTime"/></label>
+            </div>
+            <button class="submit-float-btn" onclick="submitPost()">✓등록</button>
+        </main>
+    </div>
+
+    <!-- Scroll Top Button -->
+    <button id="scrollTopBtn"><img src="./asset/up-arrow.png" alt=""></button>
+
+    <!-- script -->
+    <script type="module" src="write.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

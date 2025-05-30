@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="post-title-head">게시글</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo"><a href="index.html">AKOO</a></div>
+        <nav class="category-nav">
+            <a href="#">HOT</a>
+            <a href="#">종합 게시판</a>
+            <a href="#">스퀘어</a>
+            <a href="#">일상토크</a>
+            <a href="./huntertalk.html" class="active">헌터토크</a>
+            <a href="#">케이팝</a>
+            <a href="#">BL</a>
+            <a href="#">한국드라마</a>
+            <a href="#">해외드라마</a>
+            <a href="#">후기</a>
+        </nav>
+        <div class="darkmode-toggle">
+            <input type="checkbox" id="darkmode-switch">
+        </div>
+        <div class="mobile-menu-icon" id="menuToggle">
+            ☰
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#">HOT</a>
+            <a href="#">종합 게시판</a>
+            <a href="#">스퀘어</a>
+            <a href="#">일상토크</a>
+            <a href="./huntertalk.html">헌터토크</a>
+            <a href="#">케이팝</a>
+            <a href="#">BL</a>
+            <a href="#">한국드라마</a>
+            <a href="#">해외드라마</a>
+            <a href="#">후기</a>
+        </div>
+    </header>
+    
+    <div class="wrapper">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="#">HOT</a></li>
+                <li><a href="#">스퀘어</a></li>
+                <li><a href="#">일상토크</a></li>
+                <li><a href="./huntertalk.html">헌터토크</a></li>
+                <li><a href="#">케이팝</a></li>
+                <li><a href="#">BL</a></li>
+                <li><a href="#">한국드라마</a></li>
+                <li><a href="#">해외드라마</a></li>
+                <li><a href="#">국내 유명인</a></li>
+                <li><a href="#">해외 유명인</a></li>
+                <li class="accordion">
+                    <div class="toggle-header">아이돌 <span class="arrow"><img src="./asset/arrow.png" alt=""></span></div>
+                    <ul class="submenu">
+                    <li><a href="#">여자아이들</a></li>
+                    <li><a href="#">오마이걸</a></li>
+                    <li><a href="#">EXO</a></li>
+                    <li><a href="#">방탄소년단</a></li>
+                    <li><a href="#">러블리즈</a></li>
+                    <li><a href="#">I.O.I</a></li>
+                    <li><a href="#">인피니트</a></li>
+                    <li><a href="#">에이핑크</a></li>
+                    <li><a href="#">트와이스</a></li>
+                    <li><a href="#">2PM</a></li>
+                    <li><a href="#">샤이니</a></li>
+                    <li><a href="#">JYJ</a></li>
+                    <li><a href="#">소녀시대</a></li>
+                    <li><a href="#">동방신기</a></li>
+                    <li><a href="#">에이프릴</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="content-area">
+            <div class="board-header">
+                <h2 id="category-name">카테고리</h2>
+                <button class="write-btn" onclick="checkPasswordAndRedirect()">
+                    <img src="./asset/write.png" alt="글쓰기">
+                </button>
+            </div>
+
+            <main class="post-container">
+                <article class="post-content">
+                    <div class="title-data">
+                        <h1 id="post-title"></h1>
+                        <div id="post-meta">
+                            <span id="post-author">익명의 재채기</span> |
+                            <span id="post-date"></span> |
+                            <span id="post-views"></span>
+                        </div>
+                    </div>
+                    <div class="post-controls">
+                        <button id="edit-post">수정</button>
+                        <button id="delete-post">삭제</button>
+                    </div>
+                    <div id="post-body">
+                    </div>
+                </article>
+
+                <section class="comments-section">
+                    <div class="comments-header">
+                        <h3>댓글 (<span id="comment-count">0</span>)</h3>
+                        <button id="refresh-comments">댓글 새로고침</button>
+                    </div>
+                    <ul id="comments-list">
+                    </ul>
+                    <div class="comment-form">
+                        <textarea id="comment-input" placeholder="댓글을 입력하세요"></textarea>
+                        <button id="submit-comment">댓글 등록</button>
+                    </div>
+                </section>
+
+                <div class="back-to-list">
+                    <a id="back-to-category" href="#">← 목록</a>
+                </div>
+            </main>
+
+    <!-- Scroll Top Button -->
+    <button id="scrollTopBtn"><img src="./asset/up-arrow.png" alt=""></button>
+
+    <!-- script -->
+    <script src="./script.js"></script>
+    <script type="module" src="script/post.js"></script>
+    <script type="module" src="script/comment.js"></script>
+</body>
+</html>
