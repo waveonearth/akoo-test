@@ -804,6 +804,25 @@ body.dark #post-body a {
     text-decoration: none;
 }
 
+figure.table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+figure.table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+blockquote {
+    border-left: 4px solid #ccc;
+    padding-left: 1em;
+    color: #555;
+    margin: 1em 0;
+    font-style: italic;
+}
+
 .comments-section {
     margin-top: 50px;
 }
