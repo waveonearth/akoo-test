@@ -49,12 +49,12 @@ const categoryMap = {
 function formatVirtualTime(timestamp) {
     const realNow = new Date();
     const virtualNow = new Date(realNow);
-    virtualNow.setFullYear(virtualNow.getFullYear() - 8);
+    //virtualNow.setFullYear(virtualNow.getFullYear() - 8);
     virtualNow.setMonth(virtualNow.getMonth() - 5);
 
     const postTime = new Date(timestamp);
     const virtualPostTime = new Date(postTime);
-    virtualPostTime.setFullYear(virtualPostTime.getFullYear() - 8);
+    //virtualPostTime.setFullYear(virtualPostTime.getFullYear() - 8);
     virtualPostTime.setMonth(virtualPostTime.getMonth() - 5);
 
     const diff = virtualNow - virtualPostTime;
@@ -65,7 +65,7 @@ function formatVirtualTime(timestamp) {
         return `${String(virtualPostTime.getHours()).padStart(2, '0')}:${String(virtualPostTime.getMinutes()).padStart(2, '0')}`;
     }
 
-    return `${virtualPostTime.getFullYear()}/${String(virtualPostTime.getMonth() + 1).padStart(2, '0')}/${String(virtualPostTime.getDate()).padStart(2, '0')}`;
+    return `${String(virtualPostTime.getMonth() + 1).padStart(2, '0')}/${String(virtualPostTime.getDate()).padStart(2, '0')}`;
 }
 
 let paginatedPages = [];
