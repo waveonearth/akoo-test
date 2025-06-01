@@ -5,13 +5,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBhwO39QcKN_aiQSNZH8Q6CwbY_PWOA6kE",
-    authDomain: "khunternews-552f4.firebaseapp.com",
-    projectId: "khunternews-552f4",
-    storageBucket: "khunternews-552f4.appspot.com",
-    messagingSenderId: "387777217028",
-    appId: "1:387777217028:web:413e36ecdb8483b95e6b51",
-    measurementId: "G-K5B13765FC"
+    apiKey: "AIzaSyD5AN9oWoPZ7AHOpTL7YTfCWk3qRiRB_qo",
+    authDomain: "akoo-test.firebaseapp.com",
+    projectId: "akoo-test",
+    storageBucket: "akoo-test.firebasestorage.app",
+    messagingSenderId: "563210121212",
+    appId: "1:563210121212:web:5c59af2f94c3b6e11c8c79",
+    measurementId: "G-17EQML779Y"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -56,20 +56,12 @@ const categoryMap = {
     famous: "해외유명인"
 };
 
-let postData = null;
-
 async function loadPost() {
     if (!postId) return;
     const docRef = doc(db, "posts", postId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
         const data = docSnap.data();
-
-        document.getElementById("post-body").innerHTML = data.content;
-
-        requestAnimationFrame(() => {
-            convertOembed();
-        });
         
         document.getElementById("post-title").textContent = data.title;
         document.getElementById("post-title-head").textContent = data.title;
@@ -84,23 +76,6 @@ async function loadPost() {
     } else {
         alert("글을 찾을 수 없습니다.");
     }
-}
-
-function convertOembed() {
-    document.querySelectorAll("oembed[url]").forEach(el => {
-        const url = el.getAttribute("url");
-        const embedUrl = url.replace("youtu.be/", "www.youtube.com/embed/").split("?")[0];
-
-        const iframe = document.createElement("iframe");
-        iframe.src = embedUrl;
-        iframe.width = "100%";
-        iframe.height = "360";
-        iframe.frameBorder = "0";
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-
-        el.replaceWith(iframe);
-    });
 }
 
 document.getElementById("delete-post").addEventListener("click", async () => {

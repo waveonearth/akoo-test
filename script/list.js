@@ -9,13 +9,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBhwO39QcKN_aiQSNZH8Q6CwbY_PWOA6kE",
-    authDomain: "khunternews-552f4.firebaseapp.com",
-    projectId: "khunternews-552f4",
-    storageBucket: "khunternews-552f4.appspot.com",
-    messagingSenderId: "387777217028",
-    appId: "1:387777217028:web:413e36ecdb8483b95e6b51",
-    measurementId: "G-K5B13765FC"
+    apiKey: "AIzaSyD5AN9oWoPZ7AHOpTL7YTfCWk3qRiRB_qo",
+    authDomain: "akoo-test.firebaseapp.com",
+    projectId: "akoo-test",
+    storageBucket: "akoo-test.firebasestorage.app",
+    messagingSenderId: "563210121212",
+    appId: "1:563210121212:web:5c59af2f94c3b6e11c8c79",
+    measurementId: "G-17EQML779Y"
 };
 
 const app = initializeApp(firebaseConfig);
