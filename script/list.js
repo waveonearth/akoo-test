@@ -49,12 +49,12 @@ const categoryMap = {
 function formatVirtualTime(timestamp) {
     const realNow = new Date();
     const virtualNow = new Date(realNow);
-    virtualNow.setFullYear(virtualNow.getFullYear() - 8);
+    //virtualNow.setFullYear(virtualNow.getFullYear() - 8);
     virtualNow.setMonth(virtualNow.getMonth() - 5);
 
     const postTime = new Date(timestamp);
     const virtualPostTime = new Date(postTime);
-    virtualPostTime.setFullYear(virtualPostTime.getFullYear() - 8);
+    //virtualPostTime.setFullYear(virtualPostTime.getFullYear() - 8);
     virtualPostTime.setMonth(virtualPostTime.getMonth() - 5);
 
     const diff = virtualNow - virtualPostTime;
