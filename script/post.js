@@ -40,7 +40,7 @@ function formatVirtualTime(timestamp) {
         return `${String(virtualPostTime.getHours()).padStart(2, '0')}:${String(virtualPostTime.getMinutes()).padStart(2, '0')}`;
     }
 
-    return `${String(virtualPostTime.getMonth() + 1).padStart(2, '0')}/${String(virtualPostTime.getDate()).padStart(2, '0')}`;
+    return `${virtualPostTime.getFullYear()}/${String(virtualPostTime.getMonth() + 1).padStart(2, '0')}/${String(virtualPostTime.getDate()).padStart(2, '0')}`;
 }
 
 const categoryMap = {
