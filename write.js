@@ -37,6 +37,14 @@ const categoryMap = {
 let selectedCategory = boardParam || "미지정";
 let selectedSubhead = "잡담";
 
+const VALID_USERS = {
+    "admin": "baekakie",
+    "차연": "yeon_0826"
+};
+
+const username = document.getElementById("username").value.trim();
+const password = document.getElementById("password").value.trim();
+
 // category label 초기 세팅
 if (boardParam && categoryMap[boardParam]) {
     document.getElementById("category-label").textContent += categoryMap[boardParam];
@@ -67,6 +75,7 @@ async function loadEditData(editor) {
     document.getElementById("title").value = data.title;
     editor.setData(data.content);
     selectedSubhead = data.subcategory;
+    document.getElementById("username").value = data.username || "";
 
     // 카테고리 라벨 수정
     if (data.category && categoryMap[data.category]) {
@@ -90,8 +99,17 @@ window.submitPost = async function () {
     const textOnly = rawContent.replace(/<[^>]*>/g, "").trim();
     const subcategory = selectedSubhead;
 
-    if (!title || !textOnly || !subcategory) {
-        alert("제목, 내용, 말머리를 입력해주세요.");
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+
+    if (!title || !textOnly || !subcategory || !username || !password) {
+        alert("제목, 내용, 말머리, 유저명, 비밀번호를 입력해주세요.");
+        return;
+    }
+
+    if (!(username in VALID_USERS) || VALID_USERS[username] !== password) {
+        alert("유저명과 비밀번호가 일치하지 않습니다.");
         return;
     }
 
@@ -131,7 +149,9 @@ window.submitPost = async function () {
                 commentsCount: 0,
                 views: 0,
                 isDummy: false,
-                scheduledAt: isScheduled ? scheduledAt : null
+                scheduledAt: isScheduled ? scheduledAt : null,
+                username,
+                password
             });
             alert("글이 등록되었습니다.");
         }

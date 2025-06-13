@@ -17,7 +17,7 @@ const db = getFirestore();
 // 외부에서 공유
 const postId = window.postId;
 const formatVirtualTime = window.formatVirtualTime;
-const MASTER_PASSWORD = window.MASTER_PASSWORD;
+//const MASTER_PASSWORD = window.MASTER_PASSWORD;
 
 let commentIndex = 1;
 
@@ -54,20 +54,23 @@ function displayComment(comment) {
 
     // 삭제 이벤트
     li.querySelector(".delete-btn").addEventListener("click", async () => {
-        const pw = prompt("비밀번호를 입력하세요:");
-        if (pw === MASTER_PASSWORD) {
-            await deleteDoc(doc(db, "comments", comment.id));
-        } else {
-            alert("비밀번호가 틀렸습니다.");
+        const inputUser = prompt("작성자 이름을 입력하세요:");
+        const inputPw = prompt("비밀번호를 입력하세요:");
+        if (inputUser !== comment.username || inputPw !== comment.password) {
+            return alert("작성자 정보가 일치하지 않습니다.");
         }
+
+        await deleteDoc(doc(db, "comments", comment.id));
     });
 
     // 수정 이벤트
     li.querySelector(".edit-btn").addEventListener("click", async () => {
-        const pw = prompt("비밀번호를 입력하세요:");
-        if (pw !== MASTER_PASSWORD) return alert("비밀번호가 틀렸습니다.");
+        const inputUser = prompt("작성자 이름을 입력하세요:");
+        const inputPw = prompt("비밀번호를 입력하세요:");
+        if (inputUser !== comment.username || inputPw !== comment.password) {
+            return alert("작성자 정보가 일치하지 않습니다.");
+        }
 
-        // 수정창 토글
         document.querySelectorAll(".edit-box").forEach(b => b.style.display = "none");
         editBox.style.display = "block";
     });
@@ -96,28 +99,49 @@ function loadComments() {
     });
 }
 
+const VALID_USERS = {
+    "admin": "baekakie",
+    "차연": "yeon_0826"
+};
+
 function setupCommentEvents() {
     document.getElementById("submit-comment").addEventListener("click", async () => {
+        const username = document.getElementById("comment-username").value.trim();
+        const password = document.getElementById("comment-password").value.trim();
         const text = document.getElementById("comment-input").value.trim();
-        if (!text) return;
 
-        // 등록 전에 비밀번호 요청
-        const pw = prompt("비밀번호를 입력하세요:");
-        if (pw !== MASTER_PASSWORD) {
-            alert("비밀번호가 틀렸습니다.");
-            return;
+        if (!username || !password || !text) {
+            return alert("이름, 비밀번호, 댓글을 모두 입력해주세요.");
         }
 
+        if (VALID_USERS[username] !== password) {
+            return alert("유효하지 않은 사용자 이름 또는 비밀번호입니다.");
+        }
+
+        // 등록 전에 비밀번호 요청
+        //const pw = prompt("비밀번호를 입력하세요:");
+        //if (pw !== MASTER_PASSWORD) {
+        //    alert("비밀번호가 틀렸습니다.");
+        //    return;
+        //}
+
         if (window.editingCommentId) {
-            await updateDoc(doc(db, "comments", window.editingCommentId), {
-                text
-            });
+            const docRef = doc(db, "comments", window.editingCommentId);
+            const snap = await getDoc(docRef);
+            const data = snap.data();
+            if (data.username !== username || data.password !== password) {
+                return alert("작성자 정보가 일치하지 않습니다.");
+            }
+
+            await updateDoc(docRef, { text });
             window.editingCommentId = null;
         } else {
             await addDoc(collection(db, "comments"), {
                 postId,
                 text,
-                timestamp: Date.now()
+                timestamp: Date.now(),
+                username,
+                password
             });
 
             await updateDoc(doc(db, "posts", postId), {
@@ -126,6 +150,8 @@ function setupCommentEvents() {
         }
 
         document.getElementById("comment-input").value = "";
+        document.getElementById("comment-username").value = "";
+        document.getElementById("comment-password").value = "";
     });
 
     document.getElementById("refresh-comments").addEventListener("click", loadComments);
